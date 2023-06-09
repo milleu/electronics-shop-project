@@ -14,6 +14,7 @@ if __name__ == '__main__':
 
     print(item1.price) # 8000.0
     print(item2.price)  # 20000
+    print(item1.name)
 
     item1.add_all()
     item2.add_all()
