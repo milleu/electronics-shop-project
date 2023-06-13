@@ -19,6 +19,12 @@ class Item:
         self.price = price
         self.quantity = quantity
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.name
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -35,21 +41,26 @@ class Item:
 
 
     def add_all(self):
+        """добавляет данные в атрибут all"""
         self.all.append(self.__name)
         self.all.append(self.price)
         self.all.append(self.quantity)
         return all
+
     @property
     def name(self):
         return self.__name
+
     @name.setter
     def name(self, item_name: str):
         if len(item_name) > 10:
             raise ValueError("Длина наименования товара превышает 10 символов.")
         else:
             self.__name = item_name
+
     @classmethod
     def instantiate_from_csv(csl):
+        '''помогает прочитать файл items.csv'''
         with open("../src/items.csv", newline="") as file:
             reader = csv.reader(file)
             for string in reader:
@@ -58,8 +69,9 @@ class Item:
                     item1 = Item(__name, price, quantity)
                     csl.all.append(item1)
 
-    def __repr__(self) ->str:
-        return f"Item(name='{self.name}', price='{self.price}, quantity='{self.quantity}')"
+    #def __repr__(self) ->str:
+        #return f"Item(name='{self.name}', price='{self.price}, quantity='{self.quantity}')"
+
     @staticmethod
     def string_to_number(string: str):
         """статический метод, возвращающий число из числа-строки"""
