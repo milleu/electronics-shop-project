@@ -16,13 +16,6 @@ def test_item_get_all(item):
     item.add_all()
     assert item.all == ["Смартфон", 10000, 20]
 
-def test_name():
-    try:
-        item.name = 'СуперСмартфон'
-    except Exception as ex:
-        assert str(ex) == "Длина наименования товара превышает 10 символов."
-    else:
-        assert True
 
 def test_instantiate_from_csv():
     item1 = Item("Смартфон", 100, 1)
@@ -34,3 +27,13 @@ def test_instantiate_from_csv():
 
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
+def test_name_too_long_len(item):
+    """Название товара слишком длинное"""
+    with pytest.raises(Exception):
+        item.name = 'ТелефонТелефонТелефон'
+
+def test_repr(item):
+    assert repr(item) == "Item('Смартфон', 10000, 20)"
+
+def test_sts(item):
+    assert str(item) == 'Смартфон'
