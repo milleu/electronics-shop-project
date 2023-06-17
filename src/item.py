@@ -24,6 +24,11 @@ class Item:
 
     def __str__(self):
         return self.name
+    def __add__(self, other):
+        """складываем количество товара"""
+        if not isinstance(other, Item):
+            raise Exception('Складывать можно только объекты классов Phone и Item.')
+        return int(self.quantity) + int(other.quantity)
 
     def calculate_total_price(self) -> float:
         """
